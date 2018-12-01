@@ -7,11 +7,13 @@ import TYPES from './config/appTypes';
 import App from './App';
 import { MongoDBClient } from './config/dbclient';
 import {TodoService} from "./services/TodoService";
+import { CibcService } from "./services/cibcService";
 
 debug('ts-express:server');
 
 // initialize controllers/routes
 import "./routes/TodoController";
+import "./routes/CibcController";
 
 // set up container
 let container = new Container();
@@ -19,6 +21,7 @@ let container = new Container();
 // set up bindings
 container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
 container.bind<TodoService>(TYPES.TodoService).to(TodoService);
+container.bind<CibcService>(TYPES.CibcService).to(CibcService);
 
 const port = normalizePort(process.env.PORT || 3000);
 App.set('port', port);
