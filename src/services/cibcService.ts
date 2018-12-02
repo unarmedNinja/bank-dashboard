@@ -10,6 +10,7 @@ export class CibcService {
     token: any;
     requestoptions: any;
     key: any;
+    payRequest;
 
     constructor(){
         this.uri = "https://api.azureminilab.com/customers/1/accounts";
@@ -23,6 +24,10 @@ export class CibcService {
               'Ocp-Apim-Subscription-Key': this.key
             }
           };
+
+        this.payRequest = {
+            url : "https://test-api.adp.com/payroll/v1/workers/G4O73G9Z62SL2NFM/pay-statements?numberoflastpaydates=26"
+        }
     }
 
     callback(error, response, body) {
@@ -45,5 +50,99 @@ export class CibcService {
     return result;
    }
   
+   async getPay(){
+    //request(this.requestoptions, this.callback);
+    const result =  await request.get(this.payRequest, this.callback);
+    return result;
+   }
+
+   getIncome() {
+       var data = [
+        {
+          "line": 150,
+          "description": "Total income",
+          "amount": 63890
+        },
+        {
+          "line": 150,
+          "description": "Deduction from total invomr",
+          "amount": 17356
+        },
+        {
+          "line": 236,
+          "description": "Net income",
+          "amount": 46534
+        },
+        {
+          "line": 260,
+          "description": "Taxable income",
+          "amount": 46534
+        },
+        {
+          "line": 350,
+          "description": "Total federal non-refundable tax credit",
+          "amount": 2965
+        },
+        {
+          "line": 6150,
+          "description": "Total British Columbia non-refundable tax credit",
+          "amount": 1119
+        },
+        {
+          "line": 420,
+          "description": "Net federal tax",
+          "amount": 3666.16
+        },
+        {
+          "line": 421,
+          "description": "CPP contribution payable",
+          "amount": 4172.4
+        },
+        {
+          "line": 428,
+          "description": "Net British Columbia tax",
+          "amount": 1094.42
+        },
+        {
+          "line": 435,
+          "description": "Total payable",
+          "amount": 9461.98
+        },
+        {
+          "line": 437,
+          "description": "Total income tax deducted",
+          "amount": 0
+        },
+        {
+          "line": 476,
+          "description": "Tax paid by installments",
+          "amount": "13,000.00"
+        },
+        {
+          "line": 482,
+          "description": "Total credits",
+          "amount": 13000
+        },
+        {
+          "line": 482,
+          "description": "Total payable minus total credit",
+          "amount": 3583.02
+        },
+        {
+          "line": 482,
+          "description": "Balance from this assessment",
+          "amount": 3583.02
+        },
+        {
+          "line": 482,
+          "description": "Refund transfer",
+          "amount": 3583.02
+        }
+      ];
+
+       return new Promise<Object[]>((resolve, reject) => {
+            resolve(data);
+       });
+   }
 
 }

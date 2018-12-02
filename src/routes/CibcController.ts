@@ -18,4 +18,14 @@ export class CibcController implements interfaces.Controller {
         //return this.fooService.get(req.query.id);
         return this.cibcService.call();
     }
+
+    @httpGet("/pay")
+    private getPay(req: Request, res: Response, next: NextFunction){
+        return this.cibcService.getPay();
+    }
+
+    @httpGet("/income")
+    private getIncome(req: Request, res: Response, next: NextFunction){
+        return this.cibcService.getIncome();
+    }
 }
