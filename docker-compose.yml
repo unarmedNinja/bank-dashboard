@@ -1,9 +1,9 @@
 version: '2.2'
 
 services:
-  todo:
-    container_name: todo_api
-    image: dev/todo_api
+  bank-api:
+    container_name: bank-api
+    image: dev/bank_api
     build: 
       context: .
       network: host
